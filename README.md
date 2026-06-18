@@ -10,6 +10,8 @@ L'objectif est double :
 
 * `flip7_game.py` : Le moteur de jeu. Il gère l'état des joueurs, le déroulement des manches, la pioche, et applique strictement la règle de non-recyclage des cartes de la table avant la fin de la manche (zone tampon intermédiaire).
 * `Strategy.py` : Les algorithmes de décision. Contient la DP exacte pour l'espérance locale et la résolution de l'équation d'optimalité de Bellman (Value Iteration) pour la probabilité de gain globale.
+* `test_flip7.py` : La suite de tests unitaires (via Pytest) validant les invariants mathématiques et les règles du jeu.
+* `requirements.txt` : La liste des dépendances du projet (NumPy et Pytest).
 
 ## Approche théorique et Modélisation
 
