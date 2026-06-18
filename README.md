@@ -22,9 +22,10 @@ Pour maximiser la probabilité de gagner la partie (atteindre 200 points avant l
 * Un algorithme d'itération sur la valeur (Value Iteration) résout le point fixe de Bellman sur un tenseur 3D représentant les scores des 3 joueurs.
 * Les calculs de transition utilisent des opérations de corrélation croisée en avant (forward cross-correlation) vectorisées avec NumPy pour accélérer la convergence (critère d'arrêt sous la norme L-infini).
 
+
 ## Installation et Utilisation
 
 ### Prérequis
-Le projet nécessite Python 3.8+ et la bibliothèque NumPy.
+Installez l'ensemble des dépendances nécessaires via le fichier `requirements.txt` :
 ```bash
-pip install numpy
+pip install -r requirements.txt
