@@ -31,3 +31,41 @@ Pour maximiser la probabilité de gagner la partie (atteindre 200 points avant l
 Installez l'ensemble des dépendances nécessaires via le fichier `requirements.txt` :
 ```bash
 pip install -r requirements.txt
+```
+
+### Lancer la suite de tests
+Les tests valident les invariants du moteur (conservation des cartes, comptage des points, règle de non-recyclage) et la correction de la DP exacte :
+```bash
+pytest -q
+```
+
+### Jouer une partie (stratégies locales)
+Les stratégies `Optimal` (espérance), `Myopic` et `Threshold` s'utilisent directement, sans pré-calcul :
+```python
+from flip7_game import Game, Player
+from Strategy import Optimal, Myopic, Threshold
+
+players = [Player("A", Optimal()), Player("B", Myopic()), Player("C", Threshold(25))]
+game = Game(players, seed=42)
+winner = game.play()          # renvoie l'indice du joueur gagnant
+print(winner, [p.score for p in game.players])
+```
+
+### Stratégie en probabilité de victoire (`WinProb`)
+`WinProb` exige le tenseur de valeur global `W` et la distribution des incréments `fX`, tous deux
+construits dans le notebook `Exec.ipynb` (estimation Monte-Carlo de `fX` puis Value Iteration sur
+la grille des scores). Le calcul de `W` est lourd (tenseur `200³`, corrélations sur tout le support
+de `fX`) : comptez plusieurs minutes. Une fois `W` et `fX` disponibles :
+```python
+from Strategy import WinProb
+player = Player("WinProb", WinProb(W, fX))
+```
+Le notebook propose aussi une partie commentée en direct (`LiveGame`) et un mode interactif
+humain contre IA (`Human`).
+
+## Documentation théorique
+
+La note `flip7_note.pdf` formalise le problème et les résultats utilisés ici : modélisation à deux
+échelles de temps, équation d'optimalité de Bellman, théorème de réduction de la maximisation de
+P(victoire) à un arrêt optimal modifié, et existence / unicité / convergence de l'itération sur la
+valeur (transience, rayon spectral `< 1`, série de Neumann).
