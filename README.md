@@ -8,10 +8,12 @@ L'objectif est double :
 
 ## Structure du projet
 
-* `flip7_game.py` : Le moteur de jeu. Il gère l'état des joueurs, le déroulement des manches, la pioche, et applique strictement la règle de non-recyclage des cartes de la table avant la fin de la manche (zone tampon intermédiaire).
-* `Strategy.py` : Les algorithmes de décision. Contient la DP exacte pour l'espérance locale et la résolution de l'équation d'optimalité de Bellman (Value Iteration) pour la probabilité de gain globale.
-* `test_flip7.py` : La suite de tests unitaires (via Pytest) validant les invariants mathématiques et les règles du jeu.
-* `requirements.txt` : La liste des dépendances du projet (NumPy et Pytest).
+* `flip7_game.py` : Le moteur de jeu (état des joueurs, déroulement des manches, pioche, non-recyclage des cartes de la table avant la fin de la manche).
+* `Strategy.py` : Les politiques de décision. DP exacte d'arrêt optimal (espérance) — `Optimal`, `Myopic`, `Threshold` — et la politique `WinProb` qui exploite la fonction de valeur globale.
+* `Exec.ipynb` : Le pipeline macro (estimation de `fX`, Value Iteration `solve_macro` → tenseur `W`, extraction de `G_p`) et l'interface interactive.
+* `test_flip7.py` : La suite de tests unitaires (Pytest) validant les invariants et la correction de la DP.
+* `flip7_note.pdf` : La note théorique (formulation, preuves, algorithme).
+* `requirements.txt` : Les dépendances (NumPy, pytest).
 
 ## Approche théorique et Modélisation
 
